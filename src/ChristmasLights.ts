@@ -23,10 +23,13 @@ export class ChristmasLights {
   }
 
   private applyCommand({ action, area }: Command) {
+    const performAction = (method: (light: Light) => void) =>
+      this.updateArea(area, method);
+
     const UPDATER: Record<Action, () => void> = {
-      "turn on": () => this.updateArea(area, (light) => light.turnOn()),
-      "turn off": () => this.updateArea(area, (light) => light.turnOff()),
-      toggle: () => this.updateArea(area, (light) => light.toggle()),
+      "turn on": () => performAction((light) => light.turnOn()),
+      "turn off": () => performAction((light) => light.turnOff()),
+      toggle: () => performAction((light) => light.toggle()),
     };
 
     UPDATER[action]();
