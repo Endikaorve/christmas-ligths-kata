@@ -83,6 +83,32 @@ describe("ChristmasLights", () => {
 
       expect(christmasLights.getLightsOn()).toEqual(0);
     });
+
+    it("toggleamos todas las luces desde apagadas", () => {
+      christmasLights.applyCommand({
+        action: "toggle",
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    });
+
+    it("toggleamos todas las luces desde encendidas", () => {
+      christmasLights.applyCommand({
+        action: "turn on",
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      christmasLights.applyCommand({
+        action: "toggle",
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
   });
 
   describe("brillo", () => {
