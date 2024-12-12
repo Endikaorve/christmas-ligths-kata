@@ -150,7 +150,6 @@ describe("ChristmasLights", () => {
 
     it("encendemos todas las luces y apagamos todas las luces", () => {
       christmasLights.applyInstruction("turn on 0,0 through 999,999");
-
       christmasLights.applyInstruction("turn off 0,0 through 999,999");
 
       expect(christmasLights.getTotalBrightness()).toEqual(0);
