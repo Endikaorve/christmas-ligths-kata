@@ -8,9 +8,13 @@ type Area = { start: Position; end: Position };
 type Command = { action: Action; area: Area };
 
 export class ChristmasLights {
-  private grid: Light[][] = Array.from({ length: 1000 }, () =>
-    Array.from({ length: 1000 }, () => new Light())
-  );
+  private grid: Light[][];
+
+  constructor(size: number = 1000) {
+    this.grid = Array.from({ length: size }, () =>
+      Array.from({ length: size }, () => new Light())
+    );
+  }
 
   public applyInstruction(instruction: Instruction) {
     const command = this.parseInstructionToCommand(instruction);
@@ -19,17 +23,13 @@ export class ChristmasLights {
   }
 
   private applyCommand({ action, area }: Command) {
-    if (action === "turn on") {
-      this.updateArea(area, (light) => light.turnOn());
-    }
+    const UPDATER: Record<Action, () => void> = {
+      "turn on": () => this.updateArea(area, (light) => light.turnOn()),
+      "turn off": () => this.updateArea(area, (light) => light.turnOff()),
+      toggle: () => this.updateArea(area, (light) => light.toggle()),
+    };
 
-    if (action === "turn off") {
-      this.updateArea(area, (light) => light.turnOff());
-    }
-
-    if (action === "toggle") {
-      this.updateArea(area, (light) => light.toggle());
-    }
+    UPDATER[action]();
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {
