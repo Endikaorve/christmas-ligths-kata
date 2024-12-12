@@ -1,6 +1,6 @@
 type Instruction = `${Action} ${number},${number} through ${number},${number}`;
 
-const ACTIONS = ["turn on", "turn off", "toggle"] as const;
+const ACTIONS = ["turn on", "turn off", "toggle", "boost"] as const;
 
 type Action = (typeof ACTIONS)[number];
 type Position = [number, number];
@@ -34,6 +34,7 @@ export class ChristmasLights {
       "turn on": () => performAction((light) => light.turnOn()),
       "turn off": () => performAction((light) => light.turnOff()),
       toggle: () => performAction((light) => light.toggle()),
+      boost: () => performAction((light) => light.boost()),
     };
 
     AREA_UPDATER[action]();
@@ -104,6 +105,10 @@ class Light {
   public toggle(): void {
     this.state = !this.state;
     this.brightness += 2;
+  }
+
+  public boost(): void {
+    this.state = false;
   }
 
   public isOn(): boolean {
