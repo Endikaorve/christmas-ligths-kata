@@ -27,7 +27,8 @@ export class ChristmasLights {
 
     for (let row = startRow; row <= endRow; row++) {
       for (let column = startColumn; column <= endColumn; column++) {
-        updateLight(this.grid[row][column]);
+        const light = this.grid[row][column];
+        updateLight(light);
       }
     }
   }
