@@ -3,6 +3,8 @@ type Area = { start: Position; end: Position };
 type Action = "turn on" | "turn off" | "toggle";
 type Command = Area & { action: Action };
 
+type Instruction = string;
+
 export class ChristmasLights {
   private grid: Light[][] = Array.from({ length: 1000 }, () =>
     Array.from({ length: 1000 }, () => new Light())
@@ -41,6 +43,30 @@ export class ChristmasLights {
         end,
       });
     }
+  }
+
+  public applyInstruction(instruction: Instruction) {
+    const command = this.parseInstructionToCommand(instruction);
+
+    this.applyCommand(command);
+  }
+
+  private parseInstructionToCommand(instruction: Instruction): Command {
+    const pattern =
+      "^(turn on|turn off|toggle) (\\d+),(\\d+) through (\\d+),(\\d+)$";
+    const regex = new RegExp(pattern);
+
+    const match = instruction.match(regex);
+
+    if (!match) {
+      throw new Error(`Invalid input: ${instruction}`);
+    }
+
+    const action = match[1] as Action;
+    const start: Position = [parseInt(match[2], 10), parseInt(match[3], 10)];
+    const end: Position = [parseInt(match[4], 10), parseInt(match[5], 10)];
+
+    return { action, start, end };
   }
 
   private updateArea(
