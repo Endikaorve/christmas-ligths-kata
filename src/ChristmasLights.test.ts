@@ -47,6 +47,15 @@ describe("ChristmasLights", () => {
 
       expect(christmasLights.getLightsOn()).toEqual(1_000_000);
     });
+
+    it("sobrecargamos todas las luces 2 veces", () => {
+      christmasLights.applyInstructions([
+        "boost 0,0 through 999,999",
+        "boost 0,0 through 999,999",
+      ]);
+
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
   });
 
   describe("brillo", () => {

@@ -91,6 +91,7 @@ export class ChristmasLights {
 class Light {
   private state: boolean = false;
   private brightness: number = 0;
+  private hasBeenBoosted: boolean = false;
 
   public turnOn(): void {
     this.state = true;
@@ -108,7 +109,8 @@ class Light {
   }
 
   public boost(): void {
-    this.state = true;
+    this.state = this.hasBeenBoosted ? false : true;
+    this.hasBeenBoosted = true;
     this.brightness += 5;
   }
 
