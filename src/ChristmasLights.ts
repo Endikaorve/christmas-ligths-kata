@@ -1,6 +1,6 @@
 type Position = [number, number];
 type Area = { start: Position; end: Position };
-type Action = "turn on";
+type Action = "turn on" | "turn off";
 type Command = Area & { action: Action };
 
 export class ChristmasLights {
@@ -23,6 +23,13 @@ export class ChristmasLights {
   public applyCommand({ action, start, end }: Command) {
     if (action === "turn on") {
       this.turnOn({
+        start,
+        end,
+      });
+    }
+
+    if (action === "turn off") {
+      this.turnOff({
         start,
         end,
       });

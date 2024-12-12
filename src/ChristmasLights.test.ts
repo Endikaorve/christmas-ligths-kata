@@ -67,6 +67,22 @@ describe("ChristmasLights", () => {
 
       expect(christmasLights.getLightsOn()).toEqual(1_000_000);
     });
+
+    it("encendemos todas las luces y apagamos todas las luces", () => {
+      christmasLights.applyCommand({
+        action: "turn on",
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      christmasLights.applyCommand({
+        action: "turn off",
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
   });
 
   describe("brillo", () => {
