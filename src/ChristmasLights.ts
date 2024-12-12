@@ -1,8 +1,8 @@
+const ACTIONS = ["turn on", "turn off", "toggle", "boost"] as const;
+type Action = (typeof ACTIONS)[number];
+
 type Instruction = `${Action} ${number},${number} through ${number},${number}`;
 
-const ACTIONS = ["turn on", "turn off", "toggle", "boost"] as const;
-
-type Action = (typeof ACTIONS)[number];
 type Position = [number, number];
 type Area = { start: Position; end: Position };
 type Command = { action: Action; area: Area };
