@@ -1,63 +1,5 @@
 import { ChristmasLights } from "./ChristmasLights";
 
-// describe("ChristmasLights", () => {
-//   let christmasLights: ChristmasLights;
-
-//   beforeEach(() => {
-//     christmasLights = new ChristmasLights();
-//   });
-
-//   it("todas las luces comienzan apagadas", () => {
-//     expect(christmasLights.getLightsOn()).toEqual(0);
-//   });
-
-//   it("encendemos todas las luces", () => {
-//     christmasLights.turnOn({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-//   });
-
-//   it("encendemos todas las luces y apagamos todas las luces", () => {
-//     christmasLights.turnOn({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     christmasLights.turnOff({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     expect(christmasLights.getLightsOn()).toEqual(0);
-//   });
-
-//   it("toggleamos todas las luces desde apagadas", () => {
-//     christmasLights.toggle({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-//   });
-
-//   it("toggleamos todas las luces desde encendidas", () => {
-//     christmasLights.turnOn({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     christmasLights.toggle({
-//       start: [0, 0],
-//       end: [999, 999],
-//     });
-
-//     expect(christmasLights.getLightsOn()).toEqual(0);
-//   });
-// });
-
 describe("ChristmasLights", () => {
   let christmasLights: ChristmasLights;
 
@@ -65,53 +7,102 @@ describe("ChristmasLights", () => {
     christmasLights = new ChristmasLights();
   });
 
-  it("todas las luces comienzan apagadas", () => {
-    expect(christmasLights.getLightsOn()).toEqual(0);
+  describe("encender/apagar", () => {
+    it("todas las luces comienzan apagadas", () => {
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
+
+    it("encendemos todas las luces", () => {
+      christmasLights.turnOn({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    });
+
+    it("encendemos todas las luces y apagamos todas las luces", () => {
+      christmasLights.turnOn({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      christmasLights.turnOff({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
+
+    it("toggleamos todas las luces desde apagadas", () => {
+      christmasLights.toggle({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    });
+
+    it("toggleamos todas las luces desde encendidas", () => {
+      christmasLights.turnOn({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      christmasLights.toggle({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getLightsOn()).toEqual(0);
+    });
   });
 
-  it("encendemos todas las luces", () => {
-    christmasLights.turnOn({
-      start: [0, 0],
-      end: [999, 999],
+  describe("brillo", () => {
+    it("todas las luces comienzan sin brillo", () => {
+      expect(christmasLights.getTotalBrightness()).toEqual(0);
     });
 
-    expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-  });
+    it("encendemos todas las luces", () => {
+      christmasLights.turnOn({
+        start: [0, 0],
+        end: [999, 999],
+      });
 
-  it("encendemos todas las luces y apagamos todas las luces", () => {
-    christmasLights.turnOn({
-      start: [0, 0],
-      end: [999, 999],
+      expect(christmasLights.getTotalBrightness()).toEqual(1_000_000);
     });
 
-    christmasLights.turnOff({
-      start: [0, 0],
-      end: [999, 999],
+    it("encendemos todas las luces y apagamos todas las luces", () => {
+      christmasLights.turnOn({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      christmasLights.turnOff({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getTotalBrightness()).toEqual(0);
     });
 
-    expect(christmasLights.getLightsOn()).toEqual(0);
-  });
+    it("apagamos todas las luces sin encenderlas", () => {
+      christmasLights.turnOff({
+        start: [0, 0],
+        end: [999, 999],
+      });
 
-  it("apagamos todas las luces sin encenderlas", () => {
-    christmasLights.turnOn({
-      start: [0, 0],
-      end: [999, 999],
+      expect(christmasLights.getTotalBrightness()).toEqual(0);
     });
 
-    christmasLights.turnOff({
-      start: [0, 0],
-      end: [999, 999],
+    it("toggleamos todas las luces desde apagadas", () => {
+      christmasLights.toggle({
+        start: [0, 0],
+        end: [999, 999],
+      });
+
+      expect(christmasLights.getTotalBrightness()).toEqual(2_000_000);
     });
-
-    expect(christmasLights.getLightsOn()).toEqual(0);
-  });
-
-  it("toggleamos todas las luces desde apagadas", () => {
-    christmasLights.toggle({
-      start: [0, 0],
-      end: [999, 999],
-    });
-
-    expect(christmasLights.getLightsOn()).toEqual(2_000_000);
   });
 });

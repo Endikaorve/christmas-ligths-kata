@@ -33,25 +33,40 @@ export class ChristmasLights {
   }
 
   public getLightsOn(): number {
+    return this.grid.flat().filter((light) => light.isOn()).length;
+  }
+
+  public getTotalBrightness(): number {
     return this.grid
       .flat()
-      .reduce((acc, light) => acc + light.getBrightness(), 0);
+      .reduce(
+        (totalBrightness, light) => totalBrightness + light.getBrightness(),
+        0
+      );
   }
 }
 
 class Light {
+  private state: boolean = false;
   private brightness: number = 0;
 
   public turnOn(): void {
+    this.state = true;
     this.brightness += 1;
   }
 
   public turnOff(): void {
+    this.state = false;
     this.brightness = Math.max(0, this.brightness - 1);
   }
 
   public toggle(): void {
+    this.state = !this.state;
     this.brightness += 2;
+  }
+
+  public isOn(): boolean {
+    return this.state;
   }
 
   public getBrightness(): number {
