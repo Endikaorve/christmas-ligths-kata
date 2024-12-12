@@ -83,5 +83,11 @@ describe("ChristmasLights", () => {
 
       expect(christmasLights.getTotalBrightness()).toEqual(2_000_000);
     });
+
+    it("sobrecargamos todas las luces", () => {
+      christmasLights.applyInstructions(["boost 0,0 through 999,999"]);
+
+      expect(christmasLights.getTotalBrightness()).toEqual(5_000_000);
+    });
   });
 });

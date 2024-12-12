@@ -109,6 +109,7 @@ class Light {
 
   public boost(): void {
     this.state = false;
+    this.brightness += 5;
   }
 
   public isOn(): boolean {
