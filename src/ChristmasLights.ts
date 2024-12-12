@@ -10,19 +10,13 @@ export class ChristmasLights {
     Array.from({ length: 1000 }, () => new Light())
   );
 
-  public turnOn(area: Area) {
-    this.updateArea(area, (light) => light.turnOn());
+  public applyInstruction(instruction: Instruction) {
+    const command = this.parseInstructionToCommand(instruction);
+
+    this.applyCommand(command);
   }
 
-  public turnOff(area: Area) {
-    this.updateArea(area, (light) => light.turnOff());
-  }
-
-  public toggle(area: Area) {
-    this.updateArea(area, (light) => light.toggle());
-  }
-
-  public applyCommand({ action, start, end }: Command) {
+  private applyCommand({ action, start, end }: Command) {
     if (action === "turn on") {
       this.turnOn({
         start,
@@ -45,10 +39,16 @@ export class ChristmasLights {
     }
   }
 
-  public applyInstruction(instruction: Instruction) {
-    const command = this.parseInstructionToCommand(instruction);
+  private turnOn(area: Area) {
+    this.updateArea(area, (light) => light.turnOn());
+  }
 
-    this.applyCommand(command);
+  private turnOff(area: Area) {
+    this.updateArea(area, (light) => light.turnOff());
+  }
+
+  private toggle(area: Area) {
+    this.updateArea(area, (light) => light.toggle());
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {

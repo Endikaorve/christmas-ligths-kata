@@ -12,103 +12,103 @@ describe("ChristmasLights", () => {
       expect(christmasLights.getLightsOn()).toEqual(0);
     });
 
-    it("encendemos todas las luces", () => {
-      christmasLights.turnOn({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("encendemos todas las luces", () => {
+    //   christmasLights.turnOn({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    // });
 
-    it("encendemos todas las luces y apagamos todas las luces", () => {
-      christmasLights.turnOn({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("encendemos todas las luces y apagamos todas las luces", () => {
+    //   christmasLights.turnOn({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      christmasLights.turnOff({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    //   christmasLights.turnOff({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(0);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(0);
+    // });
 
-    it("toggleamos todas las luces desde apagadas", () => {
-      christmasLights.toggle({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("toggleamos todas las luces desde apagadas", () => {
+    //   christmasLights.toggle({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    // });
 
-    it("toggleamos todas las luces desde encendidas", () => {
-      christmasLights.turnOn({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("toggleamos todas las luces desde encendidas", () => {
+    //   christmasLights.turnOn({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      christmasLights.toggle({
-        start: [0, 0],
-        end: [999, 999],
-      });
+    //   christmasLights.toggle({
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(0);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(0);
+    // });
 
-    it("aplicamos instrucción de encender todas las luces", () => {
-      christmasLights.applyCommand({
-        action: "turn on",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("aplicamos instrucción de encender todas las luces", () => {
+    //   christmasLights.applyCommand({
+    //     action: "turn on",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    // });
 
-    it("encendemos todas las luces y apagamos todas las luces", () => {
-      christmasLights.applyCommand({
-        action: "turn on",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("encendemos todas las luces y apagamos todas las luces", () => {
+    //   christmasLights.applyCommand({
+    //     action: "turn on",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      christmasLights.applyCommand({
-        action: "turn off",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    //   christmasLights.applyCommand({
+    //     action: "turn off",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(0);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(0);
+    // });
 
-    it("toggleamos todas las luces desde apagadas", () => {
-      christmasLights.applyCommand({
-        action: "toggle",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("toggleamos todas las luces desde apagadas", () => {
+    //   christmasLights.applyCommand({
+    //     action: "toggle",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(1_000_000);
+    // });
 
-    it("toggleamos todas las luces desde encendidas", () => {
-      christmasLights.applyCommand({
-        action: "turn on",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    // it("toggleamos todas las luces desde encendidas", () => {
+    //   christmasLights.applyCommand({
+    //     action: "turn on",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      christmasLights.applyCommand({
-        action: "toggle",
-        start: [0, 0],
-        end: [999, 999],
-      });
+    //   christmasLights.applyCommand({
+    //     action: "toggle",
+    //     start: [0, 0],
+    //     end: [999, 999],
+    //   });
 
-      expect(christmasLights.getLightsOn()).toEqual(0);
-    });
+    //   expect(christmasLights.getLightsOn()).toEqual(0);
+    // });
 
     it("encendemos todas las luces", () => {
       christmasLights.applyInstruction("turn on 0,0 through 999,999");
@@ -143,42 +143,27 @@ describe("ChristmasLights", () => {
     });
 
     it("encendemos todas las luces", () => {
-      christmasLights.turnOn({
-        start: [0, 0],
-        end: [999, 999],
-      });
+      christmasLights.applyInstruction("turn on 0,0 through 999,999");
 
       expect(christmasLights.getTotalBrightness()).toEqual(1_000_000);
     });
 
     it("encendemos todas las luces y apagamos todas las luces", () => {
-      christmasLights.turnOn({
-        start: [0, 0],
-        end: [999, 999],
-      });
+      christmasLights.applyInstruction("turn on 0,0 through 999,999");
 
-      christmasLights.turnOff({
-        start: [0, 0],
-        end: [999, 999],
-      });
+      christmasLights.applyInstruction("turn off 0,0 through 999,999");
 
       expect(christmasLights.getTotalBrightness()).toEqual(0);
     });
 
     it("apagamos todas las luces sin encenderlas", () => {
-      christmasLights.turnOff({
-        start: [0, 0],
-        end: [999, 999],
-      });
+      christmasLights.applyInstruction("turn off 0,0 through 999,999");
 
       expect(christmasLights.getTotalBrightness()).toEqual(0);
     });
 
     it("toggleamos todas las luces desde apagadas", () => {
-      christmasLights.toggle({
-        start: [0, 0],
-        end: [999, 999],
-      });
+      christmasLights.applyInstruction("toggle 0,0 through 999,999");
 
       expect(christmasLights.getTotalBrightness()).toEqual(2_000_000);
     });
