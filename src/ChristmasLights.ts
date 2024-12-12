@@ -1,7 +1,7 @@
 type Position = [number, number];
 type Area = { start: Position; end: Position };
 type Action = "turn on" | "turn off" | "toggle";
-type Command = Area & { action: Action };
+type Command = { area: Area; action: Action };
 
 type Instruction = string;
 
@@ -16,39 +16,18 @@ export class ChristmasLights {
     this.applyCommand(command);
   }
 
-  private applyCommand({ action, start, end }: Command) {
+  private applyCommand({ action, area }: Command) {
     if (action === "turn on") {
-      this.turnOn({
-        start,
-        end,
-      });
+      this.updateArea(area, (light) => light.turnOn());
     }
 
     if (action === "turn off") {
-      this.turnOff({
-        start,
-        end,
-      });
+      this.updateArea(area, (light) => light.turnOff());
     }
 
     if (action === "toggle") {
-      this.toggle({
-        start,
-        end,
-      });
+      this.updateArea(area, (light) => light.toggle());
     }
-  }
-
-  private turnOn(area: Area) {
-    this.updateArea(area, (light) => light.turnOn());
-  }
-
-  private turnOff(area: Area) {
-    this.updateArea(area, (light) => light.turnOff());
-  }
-
-  private toggle(area: Area) {
-    this.updateArea(area, (light) => light.toggle());
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {
@@ -62,11 +41,12 @@ export class ChristmasLights {
       throw new Error(`Invalid input: ${instruction}`);
     }
 
-    const action = match[1] as Action;
-    const start: Position = [parseInt(match[2], 10), parseInt(match[3], 10)];
-    const end: Position = [parseInt(match[4], 10), parseInt(match[5], 10)];
+    const [, action, startRow, startColumn, endRow, endColumn] = match;
 
-    return { action, start, end };
+    const start: Position = [parseInt(startRow), parseInt(startColumn)];
+    const end: Position = [parseInt(endRow), parseInt(endColumn)];
+
+    return { action: action as Action, area: { start, end } };
   }
 
   private updateArea(
