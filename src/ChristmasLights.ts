@@ -1,9 +1,11 @@
+type Instruction = `${Action} ${number},${number} through ${number},${number}`;
+
+const ACTIONS = ["turn on", "turn off", "toggle"] as const;
+
+type Action = (typeof ACTIONS)[number];
 type Position = [number, number];
 type Area = { start: Position; end: Position };
-type Action = "turn on" | "turn off" | "toggle";
-type Command = { area: Area; action: Action };
-
-type Instruction = string;
+type Command = { action: Action; area: Area };
 
 export class ChristmasLights {
   private grid: Light[][] = Array.from({ length: 1000 }, () =>
@@ -31,8 +33,8 @@ export class ChristmasLights {
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {
-    const pattern =
-      "^(turn on|turn off|toggle) (\\d+),(\\d+) through (\\d+),(\\d+)$";
+    const actionsPattern = ACTIONS.join("|");
+    const pattern = `^(${actionsPattern}) (\\d+),(\\d+) through (\\d+),(\\d+)$`;
     const regex = new RegExp(pattern);
 
     const match = instruction.match(regex);
