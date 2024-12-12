@@ -16,7 +16,11 @@ export class ChristmasLights {
     );
   }
 
-  public applyInstruction(instruction: Instruction) {
+  public applyInstructions(instructions: Instruction[]) {
+    instructions.forEach((instruction) => this.applyInstruction(instruction));
+  }
+
+  private applyInstruction(instruction: Instruction) {
     const command = this.parseInstructionToCommand(instruction);
 
     this.applyCommand(command);
@@ -26,13 +30,13 @@ export class ChristmasLights {
     const performAction = (action: (light: Light) => void) =>
       this.updateArea(area, action);
 
-    const UPDATER: Record<Action, () => void> = {
+    const AREA_UPDATER: Record<Action, () => void> = {
       "turn on": () => performAction((light) => light.turnOn()),
       "turn off": () => performAction((light) => light.turnOff()),
       toggle: () => performAction((light) => light.toggle()),
     };
 
-    UPDATER[action]();
+    AREA_UPDATER[action]();
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {
