@@ -108,7 +108,7 @@ class Light {
   }
 
   public boost(): void {
-    this.state = false;
+    this.state = true;
     this.brightness += 5;
   }
 

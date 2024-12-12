@@ -42,13 +42,10 @@ describe("ChristmasLights", () => {
       expect(christmasLights.getLightsOn()).toEqual(0);
     });
 
-    it("sobrecargamos todas las luces desde encendidas", () => {
-      christmasLights.applyInstructions([
-        "turn on 0,0 through 999,999",
-        "boost 0,0 through 999,999",
-      ]);
+    it("sobrecargamos todas las luces", () => {
+      christmasLights.applyInstructions(["boost 0,0 through 999,999"]);
 
-      expect(christmasLights.getLightsOn()).toEqual(0);
+      expect(christmasLights.getLightsOn()).toEqual(1_000_000);
     });
   });
 
