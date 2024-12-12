@@ -81,16 +81,19 @@ export class ChristmasLights {
   }
 
   public getLightsOn(): number {
-    return this.grid.flat().filter((light) => light.isOn()).length;
+    return this.grid.reduce(
+      (count, row) => count + row.filter((light) => light.isOn()).length,
+      0
+    );
   }
 
   public getTotalBrightness(): number {
-    return this.grid
-      .flat()
-      .reduce(
-        (totalBrightness, light) => totalBrightness + light.getBrightness(),
-        0
-      );
+    return this.grid.reduce(
+      (totalBrightness, row) =>
+        totalBrightness +
+        row.reduce((sum, light) => sum + light.getBrightness(), 0),
+      0
+    );
   }
 }
 
