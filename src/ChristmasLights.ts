@@ -1,5 +1,7 @@
 type Position = [number, number];
 type Area = { start: Position; end: Position };
+type Action = "turn on";
+type Command = Area & { action: Action };
 
 export class ChristmasLights {
   private grid: Light[][] = Array.from({ length: 1000 }, () =>
@@ -16,6 +18,15 @@ export class ChristmasLights {
 
   public toggle(area: Area) {
     this.updateArea(area, (light) => light.toggle());
+  }
+
+  public applyCommand({ action, start, end }: Command) {
+    if (action === "turn on") {
+      this.turnOn({
+        start,
+        end,
+      });
+    }
   }
 
   private updateArea(
