@@ -53,10 +53,12 @@ export class ChristmasLights {
 
     const [, action, startRow, startColumn, endRow, endColumn] = match;
 
-    const start: Position = [parseInt(startRow), parseInt(startColumn)];
-    const end: Position = [parseInt(endRow), parseInt(endColumn)];
+    const area: Area = {
+      start: [parseInt(startRow), parseInt(startColumn)],
+      end: [parseInt(endRow), parseInt(endColumn)],
+    };
 
-    return { action: action as Action, area: { start, end } };
+    return { action: action as Action, area };
   }
 
   private updateArea(
