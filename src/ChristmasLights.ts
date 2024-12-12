@@ -17,7 +17,9 @@ export class ChristmasLights {
   }
 
   public applyInstructions(instructions: Instruction[]) {
-    instructions.forEach((instruction) => this.applyInstruction(instruction));
+    for (const instruction of instructions) {
+      this.applyInstruction(instruction);
+    }
   }
 
   private applyInstruction(instruction: Instruction) {
