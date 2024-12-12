@@ -41,8 +41,10 @@ export class ChristmasLights {
   }
 
   private parseInstructionToCommand(instruction: Instruction): Command {
-    const actionsPattern = ACTIONS.join("|");
-    const pattern = `^(${actionsPattern}) (\\d+),(\\d+) through (\\d+),(\\d+)$`;
+    const pattern = new RegExp(
+      `^(${ACTIONS.join("|")}) (\\d+),(\\d+) through (\\d+),(\\d+)$`
+    );
+
     const regex = new RegExp(pattern);
 
     const match = instruction.match(regex);
