@@ -49,11 +49,8 @@ export class ChristmasLights {
 
     const regex = new RegExp(pattern);
 
-    const match = instruction.match(regex);
-
-    if (!match) {
-      throw new Error(`Invalid input: ${instruction}`);
-    }
+    // Ya que la Instruction está bien tipada, el regex no puede fallar
+    const match = instruction.match(regex)!;
 
     const [, action, startRow, startColumn, endRow, endColumn] = match;
 
